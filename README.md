@@ -1,2 +1,2 @@
 # PyTray
-The Ray Tracer Challenge book, in Python
+The Ray Tracer Challenge book (by James Buck), in Python.
