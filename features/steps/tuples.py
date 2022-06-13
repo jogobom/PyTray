@@ -1,10 +1,11 @@
 from behave import given, then
 from assertpy import assert_that
+from models.tuples import tuple, point, vector, equals
 
 
 @given('a <- tuple({x}, {y}, {z}, {w})')
 def step_impl(context, x, y, z, w):  # noqa: F811
-    context.a = {'x': float(x), 'y': float(y), 'z': float(z), 'w': float(w)}
+    context.a = tuple(x, y, z, w)
 
 
 @then('a.x = {x}')
@@ -45,3 +46,23 @@ def step_impl(context):  # noqa: F811
 @then('a is a vector')
 def step_impl(context):  # noqa: F811
     assert_that(context.a['w']).is_equal_to(0)
+
+
+@given('p <- point({x}, {y}, {z})')
+def step_impl(context, x, y, z):  # noqa: F811
+    context.p = point(x, y, z)
+
+
+@then('p = tuple({x}, {y}, {z}, {w})')
+def step_impl(context, x, y, z, w):  # noqa: F811
+    assert equals(context.p, tuple(x, y, z, w))
+
+
+@given('v <- vector({x}, {y}, {z})')
+def step_impl(context, x, y, z):  # noqa: F811
+    context.v = vector(x, y, z)
+
+
+@then('v = tuple({x}, {y}, {z}, {w})')
+def step_impl(context, x, y, z, w):  # noqa: F811
+    assert equals(context.v, tuple(x, y, z, w))
