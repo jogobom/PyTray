@@ -10,8 +10,7 @@ class Tuple:
 
     def __eq__(self, other):
         def eqval(m, n):
-            EPSILON = 1e-6
-            return abs(m - n) < EPSILON
+            return abs(m - n) < 1e-6
 
         if isinstance(other, Tuple):
             return (
@@ -20,37 +19,36 @@ class Tuple:
                 and eqval(self.z, other.z)
                 and eqval(self.w, other.w)
             )
-        else:
-            return NotImplemented
+        return NotImplemented
 
 
 class Point:
     def __init__(self, x=0, y=0, z=0):
-        self.p = Tuple(x, y, z, 1.0)
+        self.point = Tuple(x, y, z, 1.0)
 
     def __repr__(self) -> str:
-        return f'Point({self.p.x!r}, {self.p.y!r}, {self.p.z!r})'
+        return f'Point({self.point.x!r}, {self.point.y!r}, {self.point.z!r})'
 
     def __eq__(self, other):
         if isinstance(other, Point):
-            return self.p == other.p
-        elif isinstance(other, Tuple):
-            return self.p == other
-        else:
-            return NotImplemented
+            return self.point == other.point
+        if isinstance(other, Tuple):
+            return self.point == other
+        return NotImplemented
 
 
 class Vector:
     def __init__(self, x=0, y=0, z=0):
-        self.v = Tuple(x, y, z, 0.0)
+        self.vector = Tuple(x, y, z, 0.0)
 
     def __repr__(self) -> str:
-        return f'Vector({self.v.x!r}, {self.v.y!r}, {self.v.z!r})'
+        return (
+            f'Vector({self.vector.x!r}, {self.vector.y!r}, {self.vector.z!r})'
+        )
 
     def __eq__(self, other):
         if isinstance(other, Vector):
-            return self.v == other.v
-        elif isinstance(other, Tuple):
-            return self.v == other
-        else:
-            return NotImplemented
+            return self.vector == other.vector
+        if isinstance(other, Tuple):
+            return self.vector == other
+        return NotImplemented

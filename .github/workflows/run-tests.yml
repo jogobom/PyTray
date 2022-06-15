@@ -19,9 +19,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install pipenv
         pipenv install --dev
-    - name: Analysing the code with pylint
+    - name: Analysing the code with flake8
       run: |
-        pipenv run pylint $(git ls-files '*.py')
+        pipenv run flake8 $(git ls-files '*.py')
     - name: Run behave
       run: |
         pipenv run behave
